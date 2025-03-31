@@ -42,7 +42,6 @@ public class GTaskASyncTask extends AsyncTask<Void, String, Integer> {
     private NotificationManager mNotifiManager;
 
     private GTaskManager mTaskManager;
-
     private OnCompleteListener mOnCompleteListener;
 
     public GTaskASyncTask(Context context, OnCompleteListener listener) {
