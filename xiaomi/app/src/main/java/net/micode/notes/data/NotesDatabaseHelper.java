@@ -26,7 +26,7 @@ import net.micode.notes.data.Notes.DataColumns;
 import net.micode.notes.data.Notes.DataConstants;
 import net.micode.notes.data.Notes.NoteColumns;
 
-
+//SQLite数据库管理器，负责数据库创建、版本升级及数据一致性维护
 public class NotesDatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "note.db";
 
@@ -42,6 +42,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
 
     private static NotesDatabaseHelper mInstance;
 
+    //创建数据库 建表SQL语句 Note表（主表）
     private static final String CREATE_NOTE_TABLE_SQL =
         "CREATE TABLE " + TABLE.NOTE + "(" +
             NoteColumns.ID + " INTEGER PRIMARY KEY," +
@@ -62,7 +63,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
             NoteColumns.GTASK_ID + " TEXT NOT NULL DEFAULT ''," +
             NoteColumns.VERSION + " INTEGER NOT NULL DEFAULT 0" +
         ")";
-
+//Data表（关联表）
     private static final String CREATE_DATA_TABLE_SQL =
         "CREATE TABLE " + TABLE.DATA + "(" +
             DataColumns.ID + " INTEGER PRIMARY KEY," +
@@ -77,7 +78,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
             DataColumns.DATA4 + " TEXT NOT NULL DEFAULT ''," +
             DataColumns.DATA5 + " TEXT NOT NULL DEFAULT ''" +
         ")";
-
+//创建索引 提高查询性能   以note的ID为索引
     private static final String CREATE_DATA_NOTE_ID_INDEX_SQL =
         "CREATE INDEX IF NOT EXISTS note_id_index ON " +
         TABLE.DATA + "(" + DataColumns.NOTE_ID + ");";
@@ -85,6 +86,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
     /**
      * Increase folder's note count when move note to the folder
      */
+    //触发器设计 插入笔记时增加父文件夹计数
     private static final String NOTE_INCREASE_FOLDER_COUNT_ON_UPDATE_TRIGGER =
         "CREATE TRIGGER increase_folder_count_on_update "+
         " AFTER UPDATE OF " + NoteColumns.PARENT_ID + " ON " + TABLE.NOTE +
@@ -206,6 +208,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
         "  WHERE " + NoteColumns.PARENT_ID + "=old." + NoteColumns.ID + ";" +
         " END";
 
+    //构造函数实现NotesDatabaseHelper实例的唯一性以及同步性
     public NotesDatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -235,6 +238,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(FOLDER_MOVE_NOTES_ON_TRASH_TRIGGER);
     }
 
+//4个系统文件夹的创建：标签文件夹、默认文件夹、临时文件夹和回收站。
     private void createSystemFolder(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
 
@@ -270,6 +274,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE.NOTE, null, values);
     }
 
+    //data表的创建
     public void createDataTable(SQLiteDatabase db) {
         db.execSQL(CREATE_DATA_TABLE_SQL);
         reCreateDataTableTriggers(db);
@@ -287,6 +292,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(DATA_UPDATE_NOTE_CONTENT_ON_DELETE_TRIGGER);
     }
 
+    //synchronized关键字确保在多线程环境下，只有一个线程能够进入方法，防止了同时创建多个实例
     static synchronized NotesDatabaseHelper getInstance(Context context) {
         if (mInstance == null) {
             mInstance = new NotesDatabaseHelper(context);
@@ -300,6 +306,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
         createDataTable(db);
     }
 
+    //数据库版本更新 涉及数据库升级时，需要对表的修改操作。
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         boolean reCreateTriggers = false;

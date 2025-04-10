@@ -17,9 +17,11 @@
 package net.micode.notes.data;
 
 import android.net.Uri;
+//定义了一堆常量，用来表示标签和文件的各种属性
 public class Notes {
     public static final String AUTHORITY = "micode_notes";
     public static final String TAG = "Notes";
+    //note表中，类型的3种取值
     public static final int TYPE_NOTE     = 0;
     public static final int TYPE_FOLDER   = 1;
     public static final int TYPE_SYSTEM   = 2;
@@ -30,6 +32,11 @@ public class Notes {
      * {@link Notes#ID_TEMPARAY_FOLDER } is for notes belonging no folder
      * {@link Notes#ID_CALL_RECORD_FOLDER} is to store call records
      */
+//    定义了4种文件夹类型：
+//    ID_ROOT_FOLDER：默认文件夹
+//    ID_TEMPARAY_FOLDER：不属于文件夹的笔记
+//    ID_CALL_RECORD_FOLDER：用于存储通话记录，以便返回
+//    ID_TRASH_FOLER：垃圾回收站
     public static final int ID_ROOT_FOLDER = 0;
     public static final int ID_TEMPARAY_FOLDER = -1;
     public static final int ID_CALL_RECORD_FOLDER = -2;
@@ -60,7 +67,12 @@ public class Notes {
      * Uri to query data
      */
     public static final Uri CONTENT_DATA_URI = Uri.parse("content://" + AUTHORITY + "/data");
-
+//数据库表1
+// Note
+// 属性有
+// ID、父级ID、创建日期、修改日期、提醒日期、文件（标签）名（摘要？）、
+// 小部件ID、小部件类型、背景颜色ID、附件、文件中的标签数量、 文件（标签）类型、最后一个同步ID、
+// 本地修改标签、移动前的ID、谷歌任务ID、代码版本信息
     public interface NoteColumns {
         /**
          * The unique ID for a row
@@ -166,7 +178,7 @@ public class Notes {
          */
         public static final String VERSION = "version";
     }
-
+//数据库表2 Data
     public interface DataColumns {
         /**
          * The unique ID for a row
@@ -241,6 +253,7 @@ public class Notes {
         public static final String DATA5 = "data5";
     }
 
+    //DataColumns接口的2个实现类，分别是文本标签和通话记录实体
     public static final class TextNote implements DataColumns {
         /**
          * Mode to indicate the text in check list mode or not

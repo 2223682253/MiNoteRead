@@ -34,14 +34,14 @@ import net.micode.notes.data.Notes.DataColumns;
 import net.micode.notes.data.Notes.NoteColumns;
 import net.micode.notes.data.NotesDatabaseHelper.TABLE;
 
-
+//负责内容提供 ， 提供对“Notes”数据的访问。它允许其他应用程序查询、插入、更新或删除标签数据。
 public class NotesProvider extends ContentProvider {
     private static final UriMatcher mMatcher;
 
     private NotesDatabaseHelper mHelper;
 
     private static final String TAG = "NotesProvider";
-
+    //6个URI的匹配码，用于区分不同的URI类型
     private static final int URI_NOTE            = 1;
     private static final int URI_NOTE_ITEM       = 2;
     private static final int URI_DATA            = 3;
@@ -49,7 +49,7 @@ public class NotesProvider extends ContentProvider {
 
     private static final int URI_SEARCH          = 5;
     private static final int URI_SEARCH_SUGGEST  = 6;
-
+//初始化UriMatcher对象mMatcher，添加一系列的URI匹配规则   2025.4.10
     static {
         mMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         mMatcher.addURI(Notes.AUTHORITY, "note", URI_NOTE);
