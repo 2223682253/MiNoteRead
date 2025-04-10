@@ -49,7 +49,7 @@ public class NotesProvider extends ContentProvider {
 
     private static final int URI_SEARCH          = 5;
     private static final int URI_SEARCH_SUGGEST  = 6;
-//初始化UriMatcher对象mMatcher，添加一系列的URI匹配规则   2025.4.10
+//初始化UriMatcher对象mMatcher  添加一系列的URI匹配规则   2025.4.10
     static {
         mMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         mMatcher.addURI(Notes.AUTHORITY, "note", URI_NOTE);

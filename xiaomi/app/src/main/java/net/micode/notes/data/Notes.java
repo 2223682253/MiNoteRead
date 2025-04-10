@@ -253,7 +253,7 @@ public class Notes {
         public static final String DATA5 = "data5";
     }
 
-    //DataColumns接口的2个实现类，分别是文本标签和通话记录实体
+    //DataColumns接口的2个实现类，分别是 文本标签 和 通话记录实体
     public static final class TextNote implements DataColumns {
         /**
          * Mode to indicate the text in check list mode or not

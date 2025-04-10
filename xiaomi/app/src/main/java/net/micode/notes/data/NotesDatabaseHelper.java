@@ -314,7 +314,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
 
         if (oldVersion == 1) {
             upgradeToV2(db);
-            skipV2 = true; // this upgrade including the upgrade from v2 to v3
+            skipV2 = true; //  this upgrade including the upgrade from v2 to v3
             oldVersion++;
         }
 
