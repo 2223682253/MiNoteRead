@@ -125,7 +125,7 @@
             android:name="net.micode.notes.ui.AlarmReceiver"
             android:process=":remote" >
         </receiver>
-<!--        全屏提醒界面，采用Theme.Holo.Wallpaper.NoTitleBar主题实现沉浸式弹窗-->
+<!--        全屏提醒界面， 采用Theme.Holo.Wallpaper.NoTitleBar主题实现沉浸式弹窗-->
         <activity
             android:name=".ui.AlarmAlertActivity"
             android:label="@string/app_name"
