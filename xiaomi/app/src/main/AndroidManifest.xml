@@ -15,6 +15,7 @@
      limitations under the License.
 -->
 
+<!--本小米便签项目代码的版本号 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.micode.notes"
     android:versionCode="1"
