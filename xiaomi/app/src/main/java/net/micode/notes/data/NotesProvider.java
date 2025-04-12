@@ -34,7 +34,7 @@ import net.micode.notes.data.Notes.DataColumns;
 import net.micode.notes.data.Notes.NoteColumns;
 import net.micode.notes.data.NotesDatabaseHelper.TABLE;
 
-//负责内容提供 ， 提供对“Notes”数据的访问。它允许其他应用程序查询、插入、更新或删除标签数据。
+//负责内容提供 ， 提供对“Notes”数据的访问。它允许其他应用程序查询、插入、更新或删除标签数据。 即数据库的增删改查
 public class NotesProvider extends ContentProvider {
     private static final UriMatcher mMatcher;
 
@@ -49,7 +49,7 @@ public class NotesProvider extends ContentProvider {
 
     private static final int URI_SEARCH          = 5;
     private static final int URI_SEARCH_SUGGEST  = 6;
-//初始化UriMatcher对象mMatcher  添加一系列的URI匹配规则   2025.4.10
+//初始化静态成员变量  初始化UriMatcher对象mMatcher  添加一系列的URI匹配规则
     static {
         mMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         mMatcher.addURI(Notes.AUTHORITY, "note", URI_NOTE);
@@ -65,6 +65,15 @@ public class NotesProvider extends ContentProvider {
      * x'0A' represents the '\n' character in sqlite. For title and content in the search result,
      * we will trim '\n' and white space in order to show more information.
      */
+
+
+//返回笔记的 ID。
+//笔记的 ID 也被重命名为 SUGGEST_COLUMN_INTENT_EXTRA_DATA，这通常用于 Android 的搜索建议中，作为传递给相关 Intent 的额外数据。
+//对 SNIPPET 列的处理：首先使用 REPLACE 函数将 x'0A'（即换行符 \n）替换为空字符串，然后使用 TRIM 函数删除前后的空白字符，处理后的结果分别重命名为 SUGGEST_COLUMN_TEXT_1
+//对 SNIPPET 列的处理：首先使用 REPLACE 函数将 x'0A'（即换行符 \n）替换为空字符串，然后使用 TRIM 函数删除前后的空白字符，处理后的结果分别重命名为 SUGGEST_COLUMN_TEXT_2
+//返回一个用于搜索建议图标的资源 ID，并命名为 SUGGEST_COLUMN_ICON_1。
+//返回一个固定的 Intent 动作 ACTION_VIEW，并命名为 SUGGEST_COLUMN_INTENT_ACTION。
+//返回一个内容类型，并命名为 SUGGEST_COLUMN_INTENT_DATA。
     private static final String NOTES_SEARCH_PROJECTION = NoteColumns.ID + ","
         + NoteColumns.ID + " AS " + SearchManager.SUGGEST_COLUMN_INTENT_EXTRA_DATA + ","
         + "TRIM(REPLACE(" + NoteColumns.SNIPPET + ", x'0A','')) AS " + SearchManager.SUGGEST_COLUMN_TEXT_1 + ","
@@ -79,12 +88,15 @@ public class NotesProvider extends ContentProvider {
         + " AND " + NoteColumns.PARENT_ID + "<>" + Notes.ID_TRASH_FOLER
         + " AND " + NoteColumns.TYPE + "=" + Notes.TYPE_NOTE;
 
+    //确定唯一NotesDatabaseHelper实例
     @Override
     public boolean onCreate() {
         mHelper = NotesDatabaseHelper.getInstance(getContext());
         return true;
     }
 
+    //数据库增删查改
+    //查询数据
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
             String sortOrder) {
@@ -147,6 +159,7 @@ public class NotesProvider extends ContentProvider {
         return c;
     }
 
+    //插入数据
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
@@ -181,6 +194,8 @@ public class NotesProvider extends ContentProvider {
         return ContentUris.withAppendedId(uri, insertedId);
     }
 
+
+    //删除
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         int count = 0;
@@ -227,6 +242,8 @@ public class NotesProvider extends ContentProvider {
         return count;
     }
 
+
+    //更新数据
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         int count = 0;
@@ -267,10 +284,10 @@ public class NotesProvider extends ContentProvider {
         return count;
     }
 
+    //辅助方法 用于在增删查改方法中使用
     private String parseSelection(String selection) {
         return (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : "");
     }
-
     private void increaseNoteVersion(long id, String selection, String[] selectionArgs) {
         StringBuilder sql = new StringBuilder(120);
         sql.append("UPDATE ");
