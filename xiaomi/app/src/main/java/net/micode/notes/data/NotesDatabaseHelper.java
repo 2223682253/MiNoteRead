@@ -340,6 +340,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    //辅助上面的数据库升级方法
     private void upgradeToV2(SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE.NOTE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE.DATA);

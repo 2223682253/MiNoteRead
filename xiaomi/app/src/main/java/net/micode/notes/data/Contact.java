@@ -25,10 +25,14 @@ import android.util.Log;
 
 import java.util.HashMap;
 
+//用于处理联系人信信，实现了从联系人数据库中获取指定电话号码对应的联系人姓名的功能
 public class Contact {
+
+    // 用于缓存电话号码和对应的联系人姓名
     private static HashMap<String, String> sContactCache;
     private static final String TAG = "Contact";
 
+    //sql查询语句 筛选出与给定电话号码匹配的联系人
     private static final String CALLER_ID_SELECTION = "PHONE_NUMBERS_EQUAL(" + Phone.NUMBER
     + ",?) AND " + Data.MIMETYPE + "='" + Phone.CONTENT_ITEM_TYPE + "'"
     + " AND " + Data.RAW_CONTACT_ID + " IN "
@@ -36,6 +40,7 @@ public class Contact {
             + " FROM phone_lookup"
             + " WHERE min_match = '+')";
 
+    //获取与给定电话号码对应的联系人姓名
     public static String getContact(Context context, String phoneNumber) {
         if(sContactCache == null) {
             sContactCache = new HashMap<String, String>();
