@@ -60,13 +60,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.text.TextWatcher;
 
 import android.graphics.BitmapFactory;
 
 import android.widget.ImageButton;
 import java.io.FileNotFoundException;
 import android.content.ContentValues;
-
 
 import net.micode.notes.R;
 import net.micode.notes.data.Notes;
@@ -101,6 +101,7 @@ public class NoteEditActivity extends Activity implements OnClickListener,
         public ImageView ibSetBgColor;
     }
 
+    private TextView mWordCountView;
     private static final String TAG = "NoteEditActivity";
     private static final int PHOTO_REQUEST = 1; // 用于图片选择的请求码
     private static final String TAG_LOCAL_START = "[local]";
@@ -145,6 +146,26 @@ public class NoteEditActivity extends Activity implements OnClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.note_edit);
 
+        mWordCountView = findViewById(R.id.tv_word_count);
+        mNoteEditor = findViewById(R.id.note_edit_view);
+
+        mNoteEditor.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                updateWordCount(s);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // 不需要实现
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // 不需要实现
+            }
+        });
+
         if (savedInstanceState == null && !initActivityState(getIntent())) {
             finish();
             return;
@@ -166,6 +187,16 @@ public class NoteEditActivity extends Activity implements OnClickListener,
             });
         } else {
             Log.e(TAG, "ImageButton with ID add_img_btn not found in layout");
+        }
+    }
+
+    private void updateWordCount(CharSequence text) {
+        if (mWordCountView != null) {
+            int count = text.toString().replaceAll("\\s+", "").length(); // 去除空格后的字数
+            mWordCountView.setText(String.format(getString(R.string.word_count_format), count));
+            if (mWorkingNote != null) {
+                mWorkingNote.setWordCount(count); // 更新字数统计
+            }
         }
     }
 
@@ -199,11 +230,15 @@ public class NoteEditActivity extends Activity implements OnClickListener,
                 // 更新工作笔记内容
                 mWorkingNote.setWorkingText(editText.getText().toString());
                 saveNoteToDatabase();
+
+                // 更新字数统计
+                updateWordCount(editText.getText());
             } else {
                 Toast.makeText(this, "获取图片失败", Toast.LENGTH_SHORT).show();
             }
         }
     }
+
     public String getPath(Context context, Uri uri) {
         String path = null;
         if (DocumentsContract.isDocumentUri(context, uri)) {
@@ -248,6 +283,7 @@ public class NoteEditActivity extends Activity implements OnClickListener,
         }
         return path;
     }
+
     private void saveNoteToDatabase() {
         ContentResolver contentResolver = getContentResolver();
         ContentValues values = new ContentValues();
@@ -255,6 +291,7 @@ public class NoteEditActivity extends Activity implements OnClickListener,
 
         // 更新note表
         values.put("snippet", mWorkingNote.getContent());
+        values.put("word_count", mWorkingNote.getWordCount()); // 保存字数统计
         contentResolver.update(
                 Uri.parse("content://micode_notes/note"),
                 values, "_id=?", new String[]{"" + id});
@@ -267,7 +304,6 @@ public class NoteEditActivity extends Activity implements OnClickListener,
                 values, "mime_type=? and note_id=?",
                 new String[]{"vnd.android.cursor.item/text_note", "" + id});
     }
-
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -396,6 +432,10 @@ public class NoteEditActivity extends Activity implements OnClickListener,
          * TODO: Add the menu for setting alert. Currently disable it because the DateTimePicker
          * is not ready
          */
+        if (mWorkingNote != null) {
+            String content = mWorkingNote.getContent();
+            updateWordCount(content != null ? content : "");
+        }
         showAlertHeader();
     }
 
@@ -414,7 +454,6 @@ public class NoteEditActivity extends Activity implements OnClickListener,
             mNoteHeaderHolder.tvAlertDate.setVisibility(View.GONE);
             mNoteHeaderHolder.ivAlertIcon.setVisibility(View.GONE);
         }
-        ;
     }
 
     @Override
@@ -768,9 +807,9 @@ public class NoteEditActivity extends Activity implements OnClickListener,
     }
 
     public void onEditTextEnter(int index, String text) {
-/**
- * Should not happen, check for debug
- */
+        /**
+         * Should not happen, check for debug
+         */
         if (index > mEditTextList.getChildCount()) {
             Log.e(TAG, "Index out of mEditTextList boundrary, should not happen");
         }
@@ -888,7 +927,7 @@ public class NoteEditActivity extends Activity implements OnClickListener,
                         sb.append(TAG_CHECKED).append(" ").append(edit.getText()).append("\n");
                         hasChecked = true;
                     } else {
-                        sb.append(TAG_UNCHECKED).append(" ").append(edit.getText()).append("\n");
+                        sb.append(TAG_UNCHECKED).append(" ").append(edit.getText()).append("\\n");
                     }
                 }
             }

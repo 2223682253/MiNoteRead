@@ -8,12 +8,12 @@
         "source": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-main-6:\\drawable-hdpi\\list_blue_single.9.png"
     },
     {
-        "merged": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-merged_res-4:\\drawable-hdpi_list_green_up.9.png.flat",
-        "source": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-main-6:\\drawable-hdpi\\list_green_up.9.png"
-    },
-    {
         "merged": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-merged_res-4:\\drawable-hdpi_dropdown_icon.9.png.flat",
         "source": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-main-6:\\drawable-hdpi\\dropdown_icon.9.png"
+    },
+    {
+        "merged": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-merged_res-4:\\drawable-hdpi_list_green_up.9.png.flat",
+        "source": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-main-6:\\drawable-hdpi\\list_green_up.9.png"
     },
     {
         "merged": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-merged_res-4:\\xml_searchable.xml.flat",
@@ -68,12 +68,12 @@
         "source": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-main-6:\\drawable-hdpi\\list_folder.9.png"
     },
     {
-        "merged": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-merged_res-4:\\drawable-hdpi_bg_btn_set_color.png.flat",
-        "source": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-main-6:\\drawable-hdpi\\bg_btn_set_color.png"
-    },
-    {
         "merged": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-merged_res-4:\\drawable-hdpi_widget_2x_green.png.flat",
         "source": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-main-6:\\drawable-hdpi\\widget_2x_green.png"
+    },
+    {
+        "merged": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-merged_res-4:\\drawable-hdpi_bg_btn_set_color.png.flat",
+        "source": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-main-6:\\drawable-hdpi\\bg_btn_set_color.png"
     },
     {
         "merged": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-merged_res-4:\\layout_account_dialog_title.xml.flat",
@@ -252,12 +252,12 @@
         "source": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-main-6:\\drawable-hdpi\\list_white_up.9.png"
     },
     {
-        "merged": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-merged_res-4:\\drawable-hdpi_list_white_middle.9.png.flat",
-        "source": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-main-6:\\drawable-hdpi\\list_white_middle.9.png"
-    },
-    {
         "merged": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-merged_res-4:\\drawable_new_note.xml.flat",
         "source": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-main-6:\\drawable\\new_note.xml"
+    },
+    {
+        "merged": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-merged_res-4:\\drawable-hdpi_list_white_middle.9.png.flat",
+        "source": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-main-6:\\drawable-hdpi\\list_white_middle.9.png"
     },
     {
         "merged": "C:\\Users\\hhsis\\.gradle\\daemon\\8.0\\net.micode.notes.app-merged_res-4:\\drawable-hdpi_list_green_single.9.png.flat",

@@ -11,7 +11,7 @@
          <item quantity="one"><ns1:g example="1" id="number">%1$s</ns1:g> result for \"<ns1:g example="???" id="search">%2$s</ns1:g>\"</item>
         
         <item quantity="other"><ns1:g example="15" id="number">%1$s</ns1:g> results for \"<ns1:g example="???" id="search">%2$s</ns1:g>\"</item>
-    </plurals></file><file path="E:\xiaomibianqian\Notes-master1\app\src\main\res\values\styles.xml" qualifiers=""><style name="TextAppearanceSuper">
+    </plurals><string name="word_count_format">字数：%d</string></file><file path="E:\xiaomibianqian\Notes-master1\app\src\main\res\values\styles.xml" qualifiers=""><style name="TextAppearanceSuper">
         <item name="android:textSize">@dimen/text_font_size_super</item>
         <item name="android:textColorLink">#0000ff</item>
     </style><style name="TextAppearanceLarge">

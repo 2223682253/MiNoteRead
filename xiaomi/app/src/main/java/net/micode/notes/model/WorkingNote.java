@@ -52,6 +52,8 @@ public class WorkingNote {
 
     private int mWidgetType;
 
+    private int wordCount;
+
     private long mFolderId;
 
     private Context mContext;
@@ -113,7 +115,15 @@ public class WorkingNote {
         mMode = 0;
         mWidgetType = Notes.TYPE_WIDGET_INVALIDE;
     }
+    // 获取字数统计的方法
+    public int getWordCount() {
+        return wordCount;
+    }
 
+    // 设置字数统计的方法
+    public void setWordCount(int count) {
+        this.wordCount = count;
+    }
     // Existing note construct
     private WorkingNote(Context context, long noteId, long folderId) {
         mContext = context;
