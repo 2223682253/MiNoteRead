@@ -1,0 +1,4 @@
+#Mon Apr 14 22:29:12 CST 2025
+base.0=E\:\\xiaomibianqian\\Notes-master1\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
