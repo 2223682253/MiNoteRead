@@ -36,7 +36,7 @@ import net.micode.notes.R;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//便签编辑页面，实现文本输入、格式设置
 public class NoteEditText extends EditText {
     private static final String TAG = "NoteEditText";
     private int mIndex;

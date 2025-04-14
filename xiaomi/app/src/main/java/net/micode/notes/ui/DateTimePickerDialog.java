@@ -28,7 +28,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
-
+//时间选择组件，用于设置提醒时间
 public class DateTimePickerDialog extends AlertDialog implements OnClickListener {
 
     private Calendar mDate = Calendar.getInstance();

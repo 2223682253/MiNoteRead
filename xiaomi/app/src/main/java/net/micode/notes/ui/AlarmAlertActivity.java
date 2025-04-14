@@ -39,7 +39,7 @@ import net.micode.notes.tool.DataUtils;
 
 import java.io.IOException;
 
-
+//闹铃提醒界面，处理定时提醒的弹窗和交互
 public class AlarmAlertActivity extends Activity implements OnClickListener, OnDismissListener {
     private long mNoteId;
     private String mSnippet;
