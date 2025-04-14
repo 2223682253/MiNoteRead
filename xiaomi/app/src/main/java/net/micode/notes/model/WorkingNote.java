@@ -31,7 +31,7 @@ import net.micode.notes.data.Notes.NoteColumns;
 import net.micode.notes.data.Notes.TextNote;
 import net.micode.notes.tool.ResourceParser.NoteBgResources;
 
-
+//负责管理当前正在活动的便签项，处理编辑状态和临时数据
 public class WorkingNote {
     // Note for the working note
     private Note mNote;

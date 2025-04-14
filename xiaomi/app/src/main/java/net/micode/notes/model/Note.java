@@ -33,7 +33,7 @@ import net.micode.notes.data.Notes.TextNote;
 
 import java.util.ArrayList;
 
-
+//表示单个便签项 标题、内容、创建时间等属性
 public class Note {
     private ContentValues mNoteDiffValues;
     private NoteData mNoteData;

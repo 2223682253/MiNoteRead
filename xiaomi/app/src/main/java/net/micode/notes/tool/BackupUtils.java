@@ -35,7 +35,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
-
+//负责数据备份与恢复，支持本地文件的读取和写入
 public class BackupUtils {
     private static final String TAG = "BackupUtils";
     // Singleton stuff

@@ -15,7 +15,7 @@
  */
 
 package net.micode.notes.gtask.exception;
-
+//处理网络异常，提示同步失败信息
 public class NetworkFailureException extends Exception {
     private static final long serialVersionUID = 2107610287180234136L;
 

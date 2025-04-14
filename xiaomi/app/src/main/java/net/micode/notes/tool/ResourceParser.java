@@ -21,7 +21,7 @@ import android.preference.PreferenceManager;
 
 import net.micode.notes.R;
 import net.micode.notes.ui.NotesPreferenceActivity;
-
+//解析界面资源（如布局、字符串）
 public class ResourceParser {
 
     public static final int YELLOW           = 0;
